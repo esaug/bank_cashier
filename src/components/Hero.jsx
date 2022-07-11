@@ -24,7 +24,11 @@ function Hero() {
     }
 
     const handleMint = ()=>{
-        minter(inputRef.current.value)
+        if(inputRef.current.value>0){minter(inputRef.current.value)}
+        else{
+            console.log('Value could not be 0')
+        }
+        
     }
 
     const minter = async(_value)=>{
@@ -106,6 +110,7 @@ function Hero() {
                         ) : (
                             <>
                                 <div>
+                                    <div></div>
                                     <button
                                         className="bg-blue-500 hover:bg-blue-700 
                                         text-white font-bold py-2 px-4 rounded"
@@ -113,7 +118,7 @@ function Hero() {
                                             e.preventDefault()
                                             handleConnection()
                                         }}
-                                    >Connect</button>
+                                    >Connect Metamask</button>
                                 </div>
                             </>
                         )}
