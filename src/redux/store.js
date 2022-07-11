@@ -4,7 +4,7 @@ import dataUser from './slices/dataSlice'
 
 
 
-export default configureStore (
+const store = configureStore (
     {
         reducer :{
             blockchain,
@@ -18,3 +18,5 @@ export default configureStore (
 
     }
 )
+
+export default store

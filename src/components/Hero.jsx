@@ -1,15 +1,26 @@
 import React, { useRef, useEffect } from 'react'
-import { useBlockchain } from '../hook/blockchain';
+import { useDispatch, useSelector } from 'react-redux';
+import { useBlockchain } from '../hook/hooks';
 import { conexion } from '../redux/slices/blockchainSlice';
-import { fetching } from '../redux/slices/dataSlice';
+import { fetchData } from '../redux/slices/dataSlice';
+import Transactions from './Transactions';
 
 function Hero() {
     
-    const {blockchain, dataUser, dispatch} = useBlockchain()
+    //const {blockchain, dataUser, dispatch} = useBlockchain()
+
+    const blockchain = useSelector((store)=>store.blockchain)
+    const dataUser = useSelector((store)=>store.dataUser)
+
+    const dispatch = useDispatch()
+
     const inputRef = useRef(null)
 
+    
+
     const handleConnection = ()=>{
-        dispatch(conexion())
+        dispatch(conexion(dispatch))
+        
     }
 
     const handleMint = ()=>{
@@ -28,24 +39,25 @@ function Hero() {
         })
     }
 
-    const fetch = (_blockchain, _dispatch, _contract)=>{
-        fetching(_blockchain, _dispatch, _contract)
-    }
-
-
+    // FETCH NFT 
+    
     useEffect(()=>{
 
-    },[blockchain])
-
-    useEffect(()=>{
-        
-        fetch(blockchain.account, dispatch, blockchain.contracNFT)
-        const interval = setInterval(()=>{ 
-            console.log(blockchain)
-            fetch(blockchain.account, dispatch, blockchain.contracNFT)
+        fetchData(blockchain.account, dispatch, blockchain.contracNFT)
+        const interval = setInterval(()=>{
+            fetchData(blockchain.account, dispatch, blockchain.contracNFT)
         },5000)
         return()=>clearInterval(interval)
-    }, [])
+    },[]) 
+
+    useEffect(()=>{
+
+        const interval = setInterval(()=>{
+            console.log(dataUser)
+        },1000*5)
+
+        return()=>clearInterval(interval)
+    },[dataUser])
 
     return (
         <>
@@ -73,6 +85,7 @@ function Hero() {
                                             id="Convert" 
                                             name="Conver"
                                             className=' border-none'
+                                            
                                                 />
                                     </div>
                             
@@ -113,7 +126,7 @@ function Hero() {
             <div className='w-full h-screen transactions bg-lime-500'>
                 <div className=''></div>
                 <div className=''>
-                    <h1>HOLA</h1>
+                    <Transactions data = {dataUser}/>
                 </div>
                 <div className=''></div>
             </div>

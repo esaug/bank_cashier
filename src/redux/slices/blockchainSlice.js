@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ethers} from "ethers";
 import { _fetchData } from "ethers/lib/utils";
 import ContratoNFT from "../../contracts/abi.json"
-import { fetching} from "./dataSlice";
+import { fetchData} from "./dataSlice";
 
 
 // ESTADO INICIAL Y CAMBIO DE ESTADO EN REDUCERS 
@@ -41,24 +41,21 @@ export const conexion= ()=>{
 
     return async (dispatch)=>{
 
-        dispatch(conectando({login:true}))
-
         try {
-
            //CONECTAR A METAMASK Y ADQUIRIR NUMERO DE RED
 
-            const account = await window.ethereum.request({
-            method: "eth_requestAccounts"
-            })
+            const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+            await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner();
+            let userAddress = await signer.getAddress();
+
 
             const networkId = await window.ethereum.request({
             method: "net_version"
             })
 
-            const contractAddress = '0x5FE6B896bcEfe32452276EB088450B552b4F04bd'
-            
-            const Provider = await new ethers.providers.Web3Provider(window.ethereum)
-            const signer = await Provider.getSigner()
+            const contractAddress = '0x9EECeb9202317B8FE3Dfa9012c0BB91feC2a657E'
+    
             const NftContract = await new ethers.Contract(contractAddress, ContratoNFT, signer)
 
             //EXTRACION DATOS DEL CONTRATO 
@@ -69,7 +66,7 @@ export const conexion= ()=>{
 
             dispatch(conectado({
             login: true,
-            account: account[0],   
+            account: userAddress,   
             contratoNFT: NftContract
         })) 
 
@@ -78,7 +75,7 @@ export const conexion= ()=>{
             console.log('CONECTED TO THE WORONG NETWORK')
         }
 
-        fetching(account[0], dispatch, NftContract)
+        fetchData(userAddress, dispatch, NftContract)
             
         } catch (err) {
             console.log(err)
