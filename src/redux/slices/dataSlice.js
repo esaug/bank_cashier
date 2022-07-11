@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { ContractFactory } from 'ethers';
-import { useDispatch } from 'react-redux';
+
 
 
 const dataUserSlice = createSlice({
@@ -27,11 +26,23 @@ const {getData} = dataUserSlice.actions
 
 export const fetching = async (_account, dispatch, _contrato)=>{
             
+    console.log('DENTRO DEL FETCH')
+    console.log(_contrato)
             if(_contrato){
-                
+                console.log('DENTRO DEL FETCH')
                 let arrayMetada= new Array()
                 arrayMetada = []
+
+                let arrayNFTs = new Array()
+                arrayNFTs = []
+
+                console.log(_contrato)
                 
+                const tx1 = _contrato.Owner_NFT(_account).then((resp)=>{
+                    arrayNFTs = resp
+                })
+                
+                console.log(arrayNFTs)
 
                 dispatch(getData({
                     NFTs: arrayMetada,

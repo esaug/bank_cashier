@@ -6,10 +6,10 @@ import Footer from '../components/Footer';
 const Home = () => {
 
     return (
-        <div>
+        <div className='bg-lime-500'>
             <Menu></Menu>
             <Hero></Hero>
-            <Footer></Footer>
+            
         </div>
     )
 }

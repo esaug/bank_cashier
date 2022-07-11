@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ethers} from "ethers";
+import { _fetchData } from "ethers/lib/utils";
 import ContratoNFT from "../../contracts/abi.json"
 import { fetching} from "./dataSlice";
 
@@ -54,7 +55,7 @@ export const conexion= ()=>{
             method: "net_version"
             })
 
-            const contractAddress = '0x53FD7C81300314DAf8471B300E7609a44bC09119'
+            const contractAddress = '0x5FE6B896bcEfe32452276EB088450B552b4F04bd'
             
             const Provider = await new ethers.providers.Web3Provider(window.ethereum)
             const signer = await Provider.getSigner()
@@ -77,6 +78,7 @@ export const conexion= ()=>{
             console.log('CONECTED TO THE WORONG NETWORK')
         }
 
+        fetching(account[0], dispatch, NftContract)
             
         } catch (err) {
             console.log(err)

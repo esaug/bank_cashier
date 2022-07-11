@@ -12,3 +12,13 @@ code {
     monospace;
 }
 
+.divHero{
+  height: 400px;
+}
+
+.transactions{
+  
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+}
+
