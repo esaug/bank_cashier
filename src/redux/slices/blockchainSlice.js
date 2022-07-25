@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ethers} from "ethers";
 import { _fetchData } from "ethers/lib/utils";
-import ContratoNFT from "../../contracts/abi.json"
+import ContratoNFT from "../../abi/abi.json"
 import { fetchData} from "./dataSlice";
 
 
@@ -54,7 +54,7 @@ export const conexion= ()=>{
             method: "net_version"
             })
 
-            const contractAddress = '0x9EECeb9202317B8FE3Dfa9012c0BB91feC2a657E'
+            const contractAddress = '0xFAA33397d8A5a16D5523b75505Ca6d3Dc37a411D'
     
             const NftContract = await new ethers.Contract(contractAddress, ContratoNFT, signer)
 

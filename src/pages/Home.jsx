@@ -6,9 +6,9 @@ import Footer from '../components/Footer';
 const Home = () => {
 
     return (
-        <div className='bg-lime-500'>
-            <Menu></Menu>
-            <Hero></Hero>
+        <div className=''>
+            <Menu/>
+            <Hero/>
             
         </div>
     )

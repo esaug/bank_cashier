@@ -22,3 +22,32 @@ code {
   grid-template-columns: 200px 1fr 200px;
 }
 
+.header{
+  height: 100px;
+}
+
+.imgNFT{
+  width: 220px;
+  height: 200px;
+}
+
+.p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.p2{
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.p3{
+  
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.div{
+  text-align: center;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Menu() {
     return (
-        <div></div>
+        <div className='header bg-blue-300'></div>
     )
 }
 
