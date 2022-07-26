@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ContractFactory, ethers } from 'ethers'
-import ContratoNFT from "../../contracts/abi.json"
+
 
 const dataUserSlice = createSlice({
     name:'dataUser',
@@ -25,7 +25,7 @@ const {getData} = dataUserSlice.actions
 
 export const fetchData = async(_account, dispatch, _contrato)=>{
     
-        console.log('DENTROO')
+    
             // Funcion de traer los NFT desde la blockchains con Ethers
         if(_contrato && _account){
             try {
@@ -71,7 +71,7 @@ export const fetchData = async(_account, dispatch, _contrato)=>{
                         }
                             
                     }
-              
+        
                     dispatch(getData({
                         _ownerNFT: ownerNFT,
                         _arrayMetadata : arrayMetadata,
