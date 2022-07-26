@@ -124,7 +124,6 @@ contract Cashier is ERC721URIStorage ,Ownable{
             }
         }
 
-        trans ++;
 
         return billetes;
     }
